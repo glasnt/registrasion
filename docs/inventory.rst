@@ -160,4 +160,64 @@ As an example: say a user has a voucher available for a 100% discount of tickets
 Flags
 -----
 
-Flags are...
+Flags are conditions that can be used to enable or disable Products or Categories, depending on whether conditions are met. They can be used to restrict specific products to specific people, or to place time limits on availability for products.
+
+Common Features
+~~~~~~~~~~~~~~~
+
+All flags have some common features:
+
+description
+    A human-readable description that is used to identify the flag to staff in the admin interface. It's not seen anywhere else in Registrasion.
+
+condition
+    This determines the effect of this flag's condition being met. There are two types of condition:
+
+    **Enable if true** conditions switch on the products and categories included under this flag if *any* such condition is met.
+
+    **Disable if false** conditions *switch off* the products and categories included under this flag is any such condition *is not* met.
+
+    If you have both types of conditions attached to a Product, every *Disable if false* condition must be met, along with one *Enable if true* condition.
+
+products
+    The Products affected by this flag.
+
+categories
+    The Categories whose Products are affected by this flag.
+
+Dependencies on products from category
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Category Dependency flags have their condition met if a product from the enabling category has been selected by the attendee. For example, if there is an *Accommodation* Category, this flag could be used to enable an *Accommodation Breakfast* category, allowing only attendees with accommodation to purchase breakfast.
+
+The only attribute is
+
+enabling_category
+    The category that causes this condition to be met.
+
+Dependencies on products
+~~~~~~~~~~~~~~~~~~~~~~~~
+Product dependency flags have their condition met if one of the enabling products have been selected by the attendee.
+
+The only attribute is
+
+enabling_products
+    The products that cause this condition to be met.
+
+Time/stock limit flags
+~~~~~~~~~~~~~~~~~~~~~~
+These flags allow the products that they cover to be made available for a limited time, or to set a global ceiling on the products covered. These can be used to remove items from sale once a sales deadline has been met, or if a venue for a specific event has reached capacity.  If there are items that fall under multiple such groupings, it makes sense to set all of these flags to be *disable if false*.
+
+The attributes you can set are:
+
+start_time
+    This condition is only met after this time.
+
+end_time
+    This condition is only met before this time.
+
+limit
+    The number of products that *all users* can purchase under this limit, regardless of their per-user limits.
+
+Voucher flags
+~~~~~~~~~~~~~
+It is possible to allow the holder of a voucher code to have access to a product as well.
