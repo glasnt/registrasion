@@ -1,5 +1,5 @@
-Registrasion Inventory
-======================
+Inventory Management
+====================
 
 Registrasion uses an inventory model to keep track of tickets, and the other various products that attendees of your conference might want to have, such as t-shirts and dinner tickets.
 
