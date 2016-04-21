@@ -26,4 +26,5 @@ https://github.com/chrisjrn/registrasion-demo
 
 Documentation
 -------------
-The documentation for ``registrasion`` is currently under construction.
+The documentation for ``registrasion`` is available at
+http://registrasion.readthedocs.org/
