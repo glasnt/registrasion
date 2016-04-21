@@ -5,7 +5,7 @@ Registrasion uses an inventory model to keep track of tickets, and the other var
 
 The inventory model is split up into Categories and Products. Categories are used to group Products.
 
-Registrasion uses a conditional model to build up complex tickets, or enable/disable specific items to specific users.
+Registrasion uses conditionals to build up complex tickets, or enable/disable specific items to specific users:
 
 Often, you will want to offer free items, such as t-shirts or dinner tickets to your attendees. Registrasion has a Discounts facility that lets you automatically offer free items to your attendees as part of their tickets. You can also automatically offer promotional discounts, such as Early Bird discounts.
 
@@ -71,3 +71,93 @@ reservation_duration
 
 display_order
     An ascending order for displaying the Products within each Category.
+
+
+Discounts
+---------
+
+Discounts serve multiple purposes: they can be used to build up complex tickets by automatically waiving the costs for sub-products; they can be used to offer freebie tickets to specific people, or people who hold voucher codes; or they can be used to enable short-term promotional discounts.
+
+Registrasion has several types of discounts, which enable themselves under specific conditions. We'll explain how these work later on, but first:
+
+Common features
+~~~~~~~~~~~~~~~
+Each discount type has the following common attributes:
+
+description
+    Display text that appears on the attendee's Invoice when the discount is applied to a Product on that invoice.
+
+You can apply a discount to individual products, or to whole categories, or both. All of the products and categories affected by the discount are displayed on the discount's admin page.
+
+If you choose to specify individual products, you have these options:
+
+product
+    The product that this discount line will apply to.
+
+percentage
+    The percentage discount that will be *taken off* this product if this discount applies.
+
+price
+    The currency value that will be *taken off* this product if this discount applies.
+
+quantity
+    The number of times that each user may apply this discount line. This applies across every valid Invoice that the user has.
+
+If you choose to specify whole categories, you have these options:
+
+category
+    The category whose products that this discount line will apply to.
+
+percentage
+    The percentage discount that will be *taken off* a product if this discount applies.
+
+quantity
+    The number of times that each user may apply this discount line. This applies across every valid Invoice that the user has.
+
+Note that you cannot have a discount apply to both a category, and a product within that category.
+
+Product Inclusions
+~~~~~~~~~~~~~~~~~~
+Product inclusion discounts allow you to enable a discount when an attendee has selected a specific enabling Product. For example, if you want to give everyone with a ticket a free t-shirt, you can use a product inclusion to offer a 100% discount on the t-shirt category, if the attendee has selected one of your ticket Products.
+
+Once a discount has been enabled in one Invoice, it is available until the quantities are exhausted for that attendee.
+
+You can set the following attributes:
+
+enabling_products
+    The products that enable the discount.
+
+Time/stock limit discounts
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+These discounts allow you to offer a limited promotion that is automatically offered to all attendees. You can specify a time range for when the discount should be enabled, you can also specify a stock limit.
+
+start_time
+    (Optional) When the discount should start being offered
+
+end_time
+    (Optional) When the discount should stop being offered
+
+limit
+    (Optional) How many times the discount is allowed to be applied -- to all users.
+
+Voucher discounts
+~~~~~~~~~~~~~~~~~
+It's possible to offer voucher codes to attendees to enable a discount. We'll describe these later.
+
+How discounts get applied
+~~~~~~~~~~~~~~~~~~~~~~~~~
+It's possible for multiple discounts to be available on any given Product. This means there need to be rules for how discounts get applied. It works like so:
+
+#. Take all of the Product that the user currently has selected, and sort them by so that the most expensive comes first.
+#. Apply the highest-value discount line for the first Product, until either all such products have a discount applied, or the discount's Quantity has been exhausted for that user for that Product.
+#. Repeat until all products have been processed.
+
+In summary, the system greedily applies the highest-value discounts for each product. This may not provide a global optimum, but it'll do.
+
+As an example: say a user has a voucher available for a 100% discount of tickets, and there's a promotional discount for 15% off tickets. In this case, the 100% discount will apply, and the 15% discount will not be disturbed.
+
+
+Flags
+-----
+
+Flags are...
