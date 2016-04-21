@@ -5,7 +5,11 @@ Registrasion uses an inventory model to keep track of tickets, and the other var
 
 The inventory model is split up into Categories and Products. Categories are used to group Products.
 
-It is possible to enable or disable products based on conditions, using Flags; and to automatically apply discounts to products. You can use discounts and flags to offer free items as inclusions as parts of tickets, but this means that you can also sell extra items to your attendees if they want to pay for them.
+Registrasion uses a conditional model to build up complex tickets, or enable/disable specific items to specific users.
+
+Often, you will want to offer free items, such as t-shirts or dinner tickets to your attendees. Registrasion has a Discounts facility that lets you automatically offer free items to your attendees as part of their tickets. You can also automatically offer promotional discounts, such as Early Bird discounts.
+
+Sometimes, you may want to restrict parts of the conference to specific attendees, for example, you might have a Speakers Dinner to only speakers. Or you might want to restrict certain Products to attendees who have purchased other items, for example, you might want to sell Comfy Chairs to people who've bought VIP tickets. You can control showing and hiding specific products using Flags.
 
 
 Categories
@@ -44,3 +48,26 @@ Products
 --------
 
 Products represent the different items that comprise a user's conference ticket.
+
+Each product has the following attributes:
+
+name
+    The display name for the product
+
+description
+    Some descriptive text that will help the user to understand the product when they're at the registration form
+
+category
+    The Category that this product will be grouped under
+
+price
+    The price that 1 unit of this product will sell for. Note that this should be the full price, before any discounts are applied.
+
+limit_per_user
+    (Optional) This restricts the number of this Product that each attendee may claim. This extends across multiple Invoices.
+
+reservation_duration
+    When a Product is added to the user's tentative registration, it is marked as unavailable for a period of time. This allows the user to build up their registration and then pay for it. This reservation duration determines how long an item should be allowed to be reserved whilst being unpaid.
+
+display_order
+    An ascending order for displaying the Products within each Category.
