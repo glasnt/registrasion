@@ -34,6 +34,9 @@ extensions = [
 
 # Autodoc requires django to be ready to go, otherwise we can't import rego's
 # things...
+sys.path.insert(0, ".")
+os.environ["DJANGO_SETTINGS_MODULE"] = "django_settings"
+
 import django
 django.setup()
 
