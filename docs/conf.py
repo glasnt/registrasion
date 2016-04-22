@@ -30,6 +30,7 @@ import os
 # ones.
 extensions = [
     "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
 ]
 
 # Autodoc requires django to be ready to go, otherwise we can't import rego's

@@ -86,7 +86,40 @@ class AttendeeProfileBase(models.Model):
 
 @python_2_unicode_compatible
 class Category(models.Model):
-    ''' Registration product categories '''
+    ''' Registration product categories
+
+    Attributes:
+        name (str): The display name for the category.
+
+        description (str): Some explanatory text for the category. This is
+            displayed alongside the forms where your attendees choose their
+            items.
+
+        required (bool): Requires a user to select an item from this category
+            during initial registration. You can use this, e.g., for making
+            sure that the user has a ticket before they select whether they
+            want a t-shirt.
+
+        render_type (int): This is used to determine what sort of form the
+            attendee will be presented with when choosing Products from this
+            category. These may be either of the following:
+
+            ``RENDER_TYPE_RADIO`` presents the Products in the Category as a
+            list of radio buttons. At most one item can be chosen at a time.
+            This works well when setting limit_per_user to 1.
+
+            ``RENDER_TYPE_QUANTITY`` shows each Product next to an input field,
+            where the user can specify a quantity of each Product type. This is
+            useful for additional extras, like Dinner Tickets.
+
+        limit_per_user (Optional[int]): This restricts the number of items
+            from this Category that each attendee may claim. This extends
+            across multiple Invoices.
+
+        display_order (int): An ascending order for displaying the Categories
+            available. By convention, your Category for ticket types should
+            have the lowest display order.
+    '''
 
     class Meta:
         verbose_name = _("inventory - category")
