@@ -18,6 +18,7 @@ Contents:
 
    overview
    inventory
+   for-zookeepr-users
 
 
 Indices and tables
